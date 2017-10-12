@@ -24,3 +24,4 @@ install openssh-server
 install gitk
 
 git config core.editor vim
+git config --global credential.helper 'cache --timeout=86400'
