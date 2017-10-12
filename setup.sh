@@ -14,12 +14,13 @@ copy_if_missing() {
 
 install vim
 copy_if_missing .vimrc
-if ! test -f ~/.vim/bundle/Vundle.vim ; then
+if ! test -d ~/.vim/bundle/Vundle.vim ; then
     echo "Installing vundle"
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim +PluginInstall +qall
 fi
 
 install openssh-server
+install gitk
 
 git config core.editor vim
