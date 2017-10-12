@@ -33,12 +33,10 @@ pkginstall() {
    fi
 }
 
-copy_if_missing() {
-  local src=$1
-  local target=${2:-${HOME}/${src}}
-  if ! test -f ${target} ; then
-      echo "Copying ${src} to ${target}"
-      cp ${src} ${target}
-  fi
+is_vm() {
+    if test -z "$(sudo virt-what)" ; then
+	    false
+    else
+	    true
+    fi
 }
-
