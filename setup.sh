@@ -7,3 +7,5 @@ install() {
 
 install vim
 install openssh-server
+
+git config core.editor vim
