@@ -46,4 +46,5 @@ if ! grep -sq kvmhost ${HOME}/.ssh/config ; then
 	    User    ${USER}
 	    ForwardX11      yes
 EOF
+    mkdir ${HOME}/kvmhost
 fi
