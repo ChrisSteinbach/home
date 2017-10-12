@@ -27,6 +27,7 @@ install openssh-server
 install gitk
 install sshfs
 install virt-what
+install curl
 
 git config core.editor vim
 git config --global credential.helper 'cache --timeout=86400'
