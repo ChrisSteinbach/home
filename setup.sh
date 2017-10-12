@@ -1,33 +1,22 @@
 #!/bin/bash
 
-if ! test -f ./functions ; then
-	echo "Please run from 'home' repository root" >&2
+source ./functions
+
+if ! test -f ./setup.sh ; then
+	err "Please run from 'home' repository root"
 	exit 1
 fi
 
-. ./functions
 
-if ! test -d ${HOME}/bin ; then
-	echo "Create bin directory"
-	mkdir ${HOME}/bin
-fi
+install -D ./functions ${HOME}/bin/functions
 
-copy_if_missing functions ${HOME}/bin
-
-install ack-grep
-install vim
-copy_if_missing .vimrc
-if ! test -d ~/.vim/bundle/Vundle.vim ; then
-    echo "Installing vundle"
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    vim +PluginInstall +qall
-fi
-
-install openssh-server
-install gitk
-install sshfs
-install virt-what
-install curl
+install/vim.sh
+pkginstall openssh-server
+pkginstall gitk
+pkginstall sshfs
+pkginstall virt-what
+pkginstall curl
+pkginstall ack-grep
 
 git config core.editor vim
 git config --global credential.helper 'cache --timeout=86400'

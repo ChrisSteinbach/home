@@ -1,6 +1,36 @@
-install() {
+#!/bin/bash
+# The shebang is only a hint for syntax highighting, the script should be
+# sourced.
+
+info() {
+    local msg="$1"
+    if [ "${VERBOSE}" = 1 ] ; then
+        echo "${msg}"
+    fi
+}
+
+err() {
+    local msg="$1"
+    echo "${msg}" >2
+}
+
+pkgquery() {
    local pkg=$1
-   sudo apt install -y ${pkg}
+   dpkg-query -s ${pkg} >/dev/null 2>&1
+}
+
+pkginstall() {
+   local pkg=$1
+   if ! pkgquery ${pkg} ; then
+       info "Installing package ${pkg}."
+       if eval sudo apt-get -qq install ${pkg} ; then
+           info "Package ${pkg} installed."
+       else
+           err "Package ${pkg} install failed."
+       fi
+   else
+       info "Package ${pkg} already installed."
+   fi
 }
 
 copy_if_missing() {
