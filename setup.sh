@@ -10,11 +10,11 @@ fi
 
 install -D ./functions ${HOME}/bin/functions
 
+pkginstall virt-what
 install/vim.sh
 install/openssh.sh
 pkginstall gitk
 pkginstall sshfs
-pkginstall virt-what
 pkginstall curl
 pkginstall ack-grep
 
