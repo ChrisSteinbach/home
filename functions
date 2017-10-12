@@ -1,0 +1,14 @@
+install() {
+   local pkg=$1
+   sudo apt install -y ${pkg}
+}
+
+copy_if_missing() {
+  local src=$1
+  local target=${2:-${HOME}/${src}}
+  if ! test -f ${target} ; then
+      echo "Copying ${src} to ${target}"
+      cp ${src} ${target}
+  fi
+}
+

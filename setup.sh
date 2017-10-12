@@ -1,17 +1,20 @@
 #!/bin/bash
 
-install() {
-   local pkg=$1
-   sudo apt install -y ${pkg}
-}
+if ! test -f ./functions ; then
+	echo "Please run from 'home' repository root" >&2
+	exit 1
+fi
 
-copy_if_missing() {
-  if ! test -f $1 ; then
-      echo "Copying $1 to home directory"
-      cp $1 ${HOME}/.vimrc
-  fi
-}
+. ./functions
 
+if ! test -d ${HOME}/bin ; then
+	echo "Create bin directory"
+	mkdir ${HOME}/bin
+fi
+
+copy_if_missing functions ${HOME}/bin
+
+install ack-grep
 install vim
 copy_if_missing .vimrc
 if ! test -d ~/.vim/bundle/Vundle.vim ; then
